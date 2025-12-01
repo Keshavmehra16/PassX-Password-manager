@@ -14,7 +14,6 @@ function copyText(txt) {
             setTimeout(() => {
                 document.getElementById("alert").style.display = "none"
             }, 2000);
-
         },
         () => {
             /* clipboard write failed */
@@ -30,10 +29,9 @@ const deletePassword = (website) => {
         return e.website != website
     })
     localStorage.setItem("passwords", JSON.stringify(arrUpdated))
-    alert(`Successfully deleted ${website}'s password`)
     showPasswords()
-
 }
+
 
 // Logic to fill the table
 const showPasswords = () => {
@@ -79,25 +77,23 @@ document.querySelector(".btn").addEventListener("click", (e) => {
     e.preventDefault()
     console.log("Clicked....")
     console.log(username.value, password.value)
-    
+
     // Add validation to prevent saving blank or null values
     if (!website.value.trim() || !username.value.trim() || !password.value.trim()) {
         alert("Please fill in all fields (Website, Username, and Password).");
         return;
     }
-    
+
     let passwords = localStorage.getItem("passwords")
     console.log(passwords)
     if (passwords == null) {
         let json = []
         json.push({ website: website.value, username: username.value, password: password.value })
-        alert("Password Saved");
         localStorage.setItem("passwords", JSON.stringify(json))
     }
     else {
         let json = JSON.parse(localStorage.getItem("passwords"))
         json.push({ website: website.value, username: username.value, password: password.value })
-        alert("Password Saved");
         localStorage.setItem("passwords", JSON.stringify(json))
     }
     showPasswords()
